@@ -17,4 +17,4 @@ steps:
     image: plugins/docker
     settings:
       dry_run: true
-      repo: zebardy/openebs-jiva-RW-check
+      repo: zebardy/openebs-jiva-rw-check
