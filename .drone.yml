@@ -10,8 +10,11 @@ trigger:
     - push
 
 steps:
-  - name: build
+  - name: docker
     image: plugins/docker
     settings:
-      dry_run: true
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
       repo: zebardy/openebs-jiva-rw-check
