@@ -1,9 +1,7 @@
 ---
 kind: pipeline
+type: kubernetes
 name: default
-
-platform:
-  type: kubernetes
 
 trigger:
   branches:
