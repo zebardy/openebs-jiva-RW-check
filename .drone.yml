@@ -3,6 +3,9 @@ kind: pipeline
 type: kubernetes
 name: default
 
+clone:
+  skip_verify: true
+
 trigger:
   branches:
     - master
