@@ -7,7 +7,6 @@ POD_DETAILS=$(curl -sSk -H "Authorization: Bearer $(cat /var/run/secrets/kuberne
 
 for run in {1..10}
 do
-  sleep 120
   for volume in $(echo $POD_DETAILS | jq -r .spec.volumes[].persistentVolumeClaim.claimName | grep -v null); do
     PVC_DETAILS=$(curl -sSk -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/api/v1/namespaces/$NAMESPACE/persistentvolumeclaims/$volume)
     VOLUME_NAME=$(echo $PVC_DETAILS | jq -r .spec.volumeName)
@@ -26,6 +25,7 @@ do
   if [ $READY -eq 1 ]; then
     break
   fi
+  sleep 120
 done
 
 echo "ready: $READY"
