@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 READY=0
 
 NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
