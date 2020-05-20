@@ -3,6 +3,7 @@
 set -x
 
 READY=0
+PREVIOUS_CHECK=1
 
 NAMESPACE=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
 POD_DETAILS=$(curl -sSk -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/api/v1/namespaces/$NAMESPACE/pods/$HOSTNAME)
@@ -34,7 +35,13 @@ do
     done
   fi
   if [ $READY -eq 1 ]; then
-    break
+    if [ $LAST_CHECK -eq 1 ]; then
+      break
+    else
+      PREVIOUS_CHECK=1
+	fi
+  else
+    PREVIOUS_CHECK=0
   fi
   sleep 120
 done
