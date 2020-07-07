@@ -3,6 +3,10 @@ kind: pipeline
 type: kubernetes
 name: default
 
+platform:
+  os: linux
+  arch: aarch64
+
 trigger:
   branches:
     - master
