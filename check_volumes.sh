@@ -35,7 +35,7 @@ do
     done
   fi
   if [ $READY -eq 1 ]; then
-    if [ $LAST_CHECK -eq 1 ]; then
+    if [ $PREVIOUS_CHECK -eq 1 ]; then
       break
     else
       PREVIOUS_CHECK=1
