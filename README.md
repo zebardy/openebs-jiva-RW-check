@@ -6,4 +6,4 @@ This project aims to generate a container image that can be used as a pod init i
 
 *CURRENTLY UNDER DEVELOPMENT*
 
-test: 3
+test: 4
