@@ -24,7 +24,7 @@ do
       if [ $PROVISIONER == "openebs.io/provisioner-iscsi" ]; then
         RW_COUNT=$(curl ${VOLUME_NAME}-ctrl-svc:9501/v1/replicas | jq -r .data[].mode | grep RW | wc -l)
         TOTAL_COUNT=$(curl -sSk -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/apps/v1/namespaces/$NAMESPACE/deployments/${VOLUME_NAME}-ctrl | jq -r '.spec.template.spec.containers[].env[] | select(.name=="REPLICATION_FACTOR")'.value)
-        CONTAINER_ENV $(curl -sSk -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/apps/v1/namespaces/$NAMESPACE/deployments/${VOLUME_NAME}-ctrl | jq -r '.spec.template.spec.containers[].env[])
+        CONTAINER_ENV $(curl -sSk -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/apps/v1/namespaces/$NAMESPACE/deployments/${VOLUME_NAME}-ctrl | jq -r '.spec.template.spec.containers[].env[]')
 	echo "$CONTAINER_ENV"
 	if [ $(( $RW_COUNT*100/$TOTAL_COUNT )) -lt 75 ]; then
           break
